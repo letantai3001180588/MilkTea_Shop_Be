@@ -166,7 +166,8 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Thay đổi tùy theo địa chỉ của frontend React
     "http://127.0.0.1:8000",  # Địa chỉ mặc định khi sử dụng Django runserver
-    "https://milk-tea-shop-yvuk.onrender.com"
+    "https://milk-tea-shop-yvuk.onrender.com",
+    "https://milk-tea-shop-be.onrender.com"
     # Thêm các địa chỉ khác nếu cần
 ]
 
