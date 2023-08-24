@@ -174,3 +174,5 @@ CORS_ALLOWED_ORIGINS = [
 # Cấu hình tùy chọn khác cho CORS
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 # ...
+
+CORS_ALLOW_ALL_ORIGINS = True
