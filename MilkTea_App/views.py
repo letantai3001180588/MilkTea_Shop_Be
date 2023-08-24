@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view, permission_classes
 from datetime import datetime, timedelta
-import jwt
+from django.contrib.auth.models import User
 from django.conf import settings
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
@@ -30,6 +30,8 @@ def login_view(request):
     password = request.data.get("password")
 
     user = authenticate(username=username, password=password)
+    info = User.objects.filter(username=request.data.get("username"))
+    serializer = UserSerializer(info, many=True)
 
     if user is not None:
         # Đăng nhập thành công, trả về thông tin user hoặc token JWT
@@ -45,11 +47,24 @@ def login_view(request):
                 "message": "Đăng nhập thành công",
                 "accessToken": str(access),
                 "refreshToken": str(refresh),
-            }
+                "user": serializer.data,
+            },
         )
     else:
         # Đăng nhập thất bại
-        return Response({"message": "Đăng nhập thất bại"}, status=400)
+        return Response({"error": "Tài khoản hoặc mật khẩu của bạn không đúng!"})
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def logout(request):
+    if request.method == "POST":
+        request.user.auth_token.delete()
+        return Response({"message": "Đăng xuất thành công"}, status=status.HTTP_200_OK)
+    return Response(
+        {"message": "Không tìm thấy refresh token"},
+        status=status.HTTP_400_BAD_REQUEST,
+    )
 
 
 @api_view(["POST"])
@@ -96,7 +111,6 @@ def create_order(request):
 
         order_item_serializer = OrderItemSerializer(data=order_item_data)
         if order_item_serializer.is_valid():
-            print("letantai......................................")
             order_item_serializer.save()
             return Response({"message": "Đặt hàng thành công"}, status=201)
         else:
