@@ -163,7 +163,12 @@ SIMPLE_JWT = {
     ),  # Thời điểm khi Refresh Token bắt đầu hoạt động: ngay sau khi cấp
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Thay đổi tùy theo địa chỉ của frontend React
+    "http://127.0.0.1:8000",  # Địa chỉ mặc định khi sử dụng Django runserver
+    "https://milk-tea-shop-yvuk.onrender.com"
+    # Thêm các địa chỉ khác nếu cần
+]
 
 # Cấu hình tùy chọn khác cho CORS
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
