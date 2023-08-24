@@ -31,12 +31,7 @@ SECRET_KEY = "django-insecure-!hkxbag@#qoppn$os6qw+s-2vjp^#hil^$u5xjt76+9#j6y$r6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "http://localhost:3000",  # Thay đổi tùy theo địa chỉ của frontend React
-    "http://127.0.0.1:8000",  # Địa chỉ mặc định khi sử dụng Django runserver
-    "https://milk-tea-shop-yvuk.onrender.com",
-    "https://milk-tea-shop-be.onrender.com",
-]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
