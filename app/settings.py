@@ -176,3 +176,21 @@ CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 # ...
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",  # Thay đổi tùy theo địa chỉ của frontend React
+    "http://127.0.0.1:8000",  # Địa chỉ mặc định khi sử dụng Django runserver
+    "https://milk-tea-shop-yvuk.onrender.com",
+    "https://milk-tea-shop-be.onrender.com"
+    # Thêm các địa chỉ khác nếu cần
+]
